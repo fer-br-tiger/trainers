@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>Datos del curso</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="row g-3 p-2" [formGroup]="cursoForm" (submit)="isValid()">
+    <mat-form-field appearance="fill" class="col-md-3">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="cursoForm.controls.nombre.touched && cursoForm.controls.nombre.invalid">
+        <span *ngIf="cursoForm.controls.nombre.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-9" appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" required>
+      <mat-error *ngIf="cursoForm.controls.descripcion.touched && cursoForm.controls.descripcion.invalid">
+        <span *ngIf="cursoForm.controls.descripcion.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-6" appearance="fill">
+      <mat-label>Publico Destinado</mat-label>
+      <input matInput formControlName="publico_destinado" required>
+      <mat-error *ngIf="cursoForm.controls.publico_destinado.touched && cursoForm.controls.publico_destinado.invalid">
+        <span *ngIf="cursoForm.controls.publico_destinado.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-6" appearance="fill">
+      <mat-label>Requisitos</mat-label>
+      <input matInput formControlName="requisitos" required>
+      <mat-error *ngIf="cursoForm.controls.requisitos.touched && cursoForm.controls.requisitos.invalid">
+        <span *ngIf="cursoForm.controls.requisitos.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-6" appearance="fill">
+      <mat-label>Url imagen de presentacion</mat-label>
+      <input matInput formControlName="url_imagen_presentacion" required>
+      <mat-error *ngIf="cursoForm.controls.url_imagen_presentacion.touched && cursoForm.controls.url_imagen_presentacion.invalid">
+        <span *ngIf="cursoForm.controls.url_imagen_presentacion.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-6" appearance="fill">
+      <mat-label>Url video de presentacion</mat-label>
+      <input matInput formControlName="url_video_presentacion" required>
+      <mat-error *ngIf="cursoForm.controls.url_video_presentacion.touched && cursoForm.controls.url_video_presentacion.invalid">
+        <span *ngIf="cursoForm.controls.url_video_presentacion.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3" appearance="fill">
+      <mat-label>Precio de Inscripcion</mat-label>
+      <input matInput formControlName="precio_inscripcion" required>
+      <span matPrefix>$&nbsp;</span>
+      <mat-error *ngIf="cursoForm.controls.precio_inscripcion.touched && cursoForm.controls.precio_inscripcion.invalid">
+        <span *ngIf="cursoForm.controls.precio_inscripcion.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3" appearance="fill">
+      <mat-label> Precio por Cuota</mat-label>
+      <input matInput formControlName="precio_cuota" required>
+      <span matPrefix>$&nbsp;</span>
+      <mat-error *ngIf="cursoForm.controls.precio_cuota.touched && cursoForm.controls.precio_cuota.invalid">
+        <span *ngIf="cursoForm.controls.precio_cuota.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3" appearance="fill">
+      <mat-label> Cantidad de Cuotas</mat-label>
+      <input matInput formControlName="cantidad_cuotas" required>
+      <mat-error *ngIf="cursoForm.controls.cantidad_cuotas.touched && cursoForm.controls.cantidad_cuotas.invalid">
+        <span *ngIf="cursoForm.controls.cantidad_cuotas.errors?.required">Este campo es obligatorio</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3" appearance="fill">
+      <mat-label>Rubro del curso</mat-label>
+      <mat-select [(value)]="selected" formControlName="subrubro">
+        <mat-option *ngFor="let rubro of rubros" [value]="rubro.value">{{rubro.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="col-auto mx-auto" type="submit" color="primary">Registrar</button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

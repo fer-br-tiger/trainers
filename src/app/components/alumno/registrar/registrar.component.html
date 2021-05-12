@@ -1,0 +1,24 @@
+<form class="row g-3 my-form mx-auto mt-3 border rounded p-2">
+    <mat-hint>(*) Campos obligatorios</mat-hint>
+    <mat-form-field appearance="fill" class="col-md-6">
+        <mat-label>Nombre</mat-label>
+        <input matInput [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput [formControl]="lastName" required>
+        <mat-error *ngIf="lastName.invalid">{{getErrorLastName()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-12" appearance="fill">
+        <mat-label>DNI</mat-label>
+        <input matInput minlength="8" [formControl]="dni" required>
+        <mat-error *ngIf="dni.invalid">{{getErrorDNI()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="usuario@ejemplo.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="button" color="primary" class="col-auto mx-auto">Registrar</button>
+</form>
