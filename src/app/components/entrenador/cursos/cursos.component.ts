@@ -1,8 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { CursosService } from 'src/app/services/cursos.service';
+import { FormcursoComponent } from '../formcurso/formcurso.component';
 
 export interface Curso {
   nombre: string;
@@ -17,25 +20,29 @@ export interface Curso {
   id_subrubros: number;
 }
 
-interface Rubro {
-  value: number;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.scss']
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'publico_destinado', 'requisitos', 'precio_inscripcion', 'precio_cuota', 'cantidad_cuotas'];
-  dataSource: Curso[] = [];
+  dataSource = new MatTableDataSource<Curso>();
   cursoForm!: FormGroup;
 
-  @ViewChild(MatTable) tabla!: MatTable<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cursosService: CursosService, public dialog: MatDialog, private formBuilder: FormBuilder) { }
-
+  constructor(private cursosService: CursosService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+    try {
+      this.cursosService.getCursos().subscribe(resp => {
+        this.dataSource.data = resp.rows;
+      });
+    } catch {
+      console.log('');
+    }
+  }
+  
   ngOnInit(): void {
     this.cursoForm = this.formBuilder.group({
       nombre: ['', [Validators.required]],
@@ -49,19 +56,24 @@ export class CursosComponent implements OnInit {
       cantidad_cuotas: ['', [Validators.required]],
       subrubro: ['']
     });
+  }
 
-    try {
-      this.cursosService.getCursos().subscribe(resp => {
-        this.dataSource = resp.rows;
-      });
-    } catch {
-      console.log('');
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if(this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogContent, { data: this.cursoForm });
+    const dialogRef = this.dialog.open(FormcursoComponent, { data: this.cursoForm });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
@@ -81,31 +93,10 @@ export class CursosComponent implements OnInit {
         this.cursosService.postCursos(curso).subscribe(resp => {
           console.log(resp);
         })
-        this.dataSource.push(curso);
-        this.tabla.renderRows();
+        this.dataSource.data.push(curso);
+        this.dataSource._updateChangeSubscription();
         this.cursoForm.reset();
       }
     });
-  }
-}
-
-@Component({
-  selector: 'dialog-content',
-  templateUrl: 'dialog-content.html'
-})
-export class DialogContent {
-  rubros: Rubro[] = [
-    { value: 1, viewValue: 'Futbol' },
-    { value: 2, viewValue: 'Basquet' },
-    { value: 3, viewValue: 'Natacion' },
-    { value: 4, viewValue: 'Hockey' },
-    { value: 5, viewValue: 'Running' }
-  ];
-  selected: number = this.rubros[0].value;
-
-  constructor(public dialogRef: MatDialogRef<DialogContent>, @Inject(MAT_DIALOG_DATA) public cursoForm: FormGroup) { }
-
-  isValid() {
-    if(this.cursoForm.valid) this.dialogRef.close(this.cursoForm.valid);
   }
 }
