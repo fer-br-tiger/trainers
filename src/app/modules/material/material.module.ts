@@ -14,6 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatDividerModule
   ]
 })
 

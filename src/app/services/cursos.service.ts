@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const cudOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 const cudOptionsXWWForm = {
   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})

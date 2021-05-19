@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { EntrenadorRoutingModule } from './entrenador-routing.module';
 import { CursosComponent } from './cursos/cursos.component';
-import { AlumnosComponent } from './alumnos/alumnos.component';
+import { AlumnosComponent, ConfirmDialog } from './alumnos/alumnos.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormcursoComponent } from './formcurso/formcurso.component';
+import { CursosService } from 'src/app/services/cursos.service';
+import { AlumnosService } from 'src/app/services/alumnos.service';
+import { FormalumnoComponent } from './formalumno/formalumno.component';
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { FormcursoComponent } from './formcurso/formcurso.component';
     CursosComponent,
     AlumnosComponent,
     PagosComponent,
-    FormcursoComponent
+    FormcursoComponent,
+    ConfirmDialog,
+    FormalumnoComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +28,10 @@ import { FormcursoComponent } from './formcurso/formcurso.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    CursosService,
+    AlumnosService
   ]
 })
 export class EntrenadorModule { }

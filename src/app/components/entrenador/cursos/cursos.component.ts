@@ -7,19 +7,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CursosService } from 'src/app/services/cursos.service';
 import { FormcursoComponent } from '../formcurso/formcurso.component';
 
-export interface Curso {
-  nombre: string;
-  descripcion: string;
-  publico_destinado: string;
-  requisitos: string;
-  url_imagen_presentacion: string;
-  url_video_presentacion: string;
-  precio_inscripcion: number;
-  precio_cuota: number;
-  cantidad_cuotas: number;
-  id_subrubros: number;
-}
-
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
@@ -27,7 +14,7 @@ export interface Curso {
 })
 export class CursosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'publico_destinado', 'requisitos', 'precio_inscripcion', 'precio_cuota', 'cantidad_cuotas'];
-  dataSource = new MatTableDataSource<Curso>();
+  dataSource = new MatTableDataSource();
   cursoForm!: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,9 +77,7 @@ export class CursosComponent implements OnInit, AfterViewInit {
           cantidad_cuotas: this.cursoForm.get('cantidad_cuotas')?.value,
           id_subrubros: this.cursoForm.get('subrubro')?.value
         };
-        this.cursosService.postCursos(curso).subscribe(resp => {
-          console.log(resp);
-        })
+        this.cursosService.postCursos(curso).subscribe();
         this.dataSource.data.push(curso);
         this.dataSource._updateChangeSubscription();
         this.cursoForm.reset();

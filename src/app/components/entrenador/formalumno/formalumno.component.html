@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>Datos del alumno</h2>
+    <button mat-icon-button matTooltip="Cerrar" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+    <form class="row" [formGroup]="alumnoForm" (submit)="isValid()">
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>person</mat-icon>
+                    Datos personales
+                </ng-template>
+                <div class="row g-3 mt-1 w-100">
+
+                    <mat-form-field class="col-md-6" appearance="fill" cdkFocusInitial>
+                        <mat-label>Nombres</mat-label>
+                        <input matInput formControlName="nombres" required>
+                        <mat-error *ngIf="alumnoForm.controls.nombres.touched && alumnoForm.controls.nombres.invalid">
+                            <span *ngIf="alumnoForm.controls.nombres.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-6" appearance="fill">
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput formControlName="apellidos" required>
+                        <mat-error *ngIf="alumnoForm.controls.apellidos.touched && alumnoForm.controls.apellidos.invalid">
+                            <span *ngIf="alumnoForm.controls.apellidos.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>DNI</mat-label>
+                        <input matInput formControlName="dni" minlength="8" required>
+                        <mat-error *ngIf="alumnoForm.controls.dni.touched && alumnoForm.controls.dni.invalid">
+                            <span>{{getErrorDNI()}}</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>phone</mat-icon>
+                    Datos de contacto
+                </ng-template>
+                <div class="row g-3 mt-1 w-100">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Celular</mat-label>
+                        <input matInput formControlName="celular" required>
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-error *ngIf="alumnoForm.controls.celular.touched && alumnoForm.controls.celular.invalid">
+                            <span *ngIf="alumnoForm.controls.celular.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Correo</mat-label>
+                        <input matInput formControlName="mail" required>
+                        <mat-icon matSuffix>mail</mat-icon>
+                        <mat-error *ngIf="alumnoForm.controls.mail.touched && alumnoForm.controls.mail.invalid">
+                            <span>{{getErrorMail()}}</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>home</mat-icon>
+                    Dirección
+                </ng-template>
+                <div class="row g-3 mt-1 w-100">
+
+                    <mat-form-field class="col-md-9" appearance="fill">
+                        <mat-label>Calle</mat-label>
+                        <input matInput formControlName="direccion_calle" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_calle.touched && alumnoForm.controls.direccion_calle.invalid">
+                            <span *ngIf="alumnoForm.controls.direccion_calle.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-3" appearance="fill">
+                        <mat-label>Número</mat-label>
+                        <input matInput formControlName="direccion_numero" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_numero.touched && alumnoForm.controls.direccion_numero.invalid">
+                            <span *ngIf="alumnoForm.controls.direccion_numero.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-6" appearance="fill">
+                        <mat-label>Barrio</mat-label>
+                        <input matInput formControlName="direccion_barrio" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_barrio.touched && alumnoForm.controls.direccion_barrio.invalid">
+                            <span *ngIf="alumnoForm.controls.direccion_barrio.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-6" appearance="fill">
+                        <mat-label>Localidad</mat-label>
+                        <input matInput formControlName="direccion_localidad" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_localidad.touched && alumnoForm.controls.direccion_localidad.invalid">
+                            <span *ngIf="alumnoForm.controls.direccion_localidad.errors?.required">Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        <button mat-raised-button class="col-auto mx-auto mt-1" type="submit" color="primary">Registrar</button>
+    </form>
+</mat-dialog-content>
