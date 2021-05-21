@@ -93,10 +93,10 @@ export class AlumnosComponent implements OnInit, AfterViewInit {
           dni: this.alumnoForm.get('dni')?.value,
           celular: this.alumnoForm.get('celular')?.value,
           mail: this.alumnoForm.get('mail')?.value,
-          direccion_calle: this.alumnoForm.get('direccion_calle')?.value,
-          direccion_numero: this.alumnoForm.get('direccion_numero')?.value,
-          direccion_barrio: this.alumnoForm.get('direccion_barrio')?.value,
-          direccion_localidad: this.alumnoForm.get('direccion_localidad')?.value
+          direccionCalle: this.alumnoForm.get('direccion_calle')?.value,
+          direccionNumero: this.alumnoForm.get('direccion_numero')?.value,
+          direccionBarrio: this.alumnoForm.get('direccion_barrio')?.value,
+          direccionLocalidad: this.alumnoForm.get('direccion_localidad')?.value
         };
         this.alumnosService.postAlumnos(alumno).subscribe();
         this.dataSource.data.push(alumno);

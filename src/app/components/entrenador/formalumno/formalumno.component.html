@@ -15,9 +15,9 @@
                 </ng-template>
                 <div class="row g-3 mt-1 w-100">
 
-                    <mat-form-field class="col-md-6" appearance="fill" cdkFocusInitial>
+                    <mat-form-field class="col-md-6" appearance="fill">
                         <mat-label>Nombres</mat-label>
-                        <input matInput formControlName="nombres" required>
+                        <input matInput formControlName="nombres" cdkFocusInitial required>
                         <mat-error *ngIf="alumnoForm.controls.nombres.touched && alumnoForm.controls.nombres.invalid">
                             <span *ngIf="alumnoForm.controls.nombres.errors?.required">Este campo es obligatorio</span>
                         </mat-error>
