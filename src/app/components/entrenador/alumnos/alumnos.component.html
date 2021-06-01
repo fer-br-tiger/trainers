@@ -42,22 +42,22 @@
 
         <ng-container matColumnDef="direccion_calle">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Calle </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion_calle || element.direccionCalle}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.direccion_calle}} </td>
         </ng-container>
 
         <ng-container matColumnDef="direccion_numero">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nro. </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion_numero || element.direccionNumero}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.direccion_numero}} </td>
         </ng-container>
 
         <ng-container matColumnDef="direccion_barrio">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Barrio </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion_barrio || element.direccionBarrio}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.direccion_barrio}} </td>
         </ng-container>
 
         <ng-container matColumnDef="direccion_localidad">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Localidad </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion_localidad || element.direccionLocalidad}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.direccion_localidad}} </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

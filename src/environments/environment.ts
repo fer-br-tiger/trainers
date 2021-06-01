@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url_servicios_base: 'http://66.97.38.48:3004'
+  url_servicios_base: 'http://localhost:3004'
 };
 
 /*
